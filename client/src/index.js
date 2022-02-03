@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import App from './App';
 import Home from '../src/components/Home'
+import MintNFT from '../src/components/MintNFT'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />}/>
         <Route path="/playground" element={<Home />}/>
+        <Route path="/mintnft" element={<MintNFT />}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

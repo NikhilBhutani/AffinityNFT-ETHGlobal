@@ -19,7 +19,8 @@
     "react-moralis": "^1.2.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "antd": "^4.16.13"
   },
   "scripts": {
     "start": "react-scripts start",
