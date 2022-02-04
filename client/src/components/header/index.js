@@ -22,12 +22,6 @@ function header() {
             <a href="/whitepaper" className="mr-5 hover:text-gray-900">
               Whitepaper
             </a>
-            <a href="/faq" className="mr-5 hover:text-gray-900">
-              FAQs
-            </a>
-            <a href="/blog" className="mr-5 hover:text-gray-900">
-              Blog
-            </a>
           </div>
         </div>
 
