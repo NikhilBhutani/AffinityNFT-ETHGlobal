@@ -19,6 +19,14 @@ async function main() {
 
     // saveFrontendFiles(exchange);
 
+    const Governor = await hre.ethers.getContractFactory("AffinityGovernor");
+    const governor = await Governor.deploy(token.address);
+
+    await governor.deployed();
+    console.log("Governor Contract address:", governor.address);
+
+    // saveFrontendFiles(exchange);
+
 }
 
 // function saveFrontendFiles(contract) {
