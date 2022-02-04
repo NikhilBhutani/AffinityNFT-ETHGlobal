@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import App from './App';
 import Home from '../src/components/Home'
-import MintNFT from '../src/components/MintNFT'
+import MintNFT from './components/MintNFT/partA'
 
 ReactDOM.render(
   <React.StrictMode>
