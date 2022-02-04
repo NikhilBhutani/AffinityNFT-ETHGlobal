@@ -43,9 +43,12 @@ const styles = {
 
 function PartA() {
     //const { Moralis } = useMoralis();
-    const API_URL =  'https://s3nlldgkmodi.usemoralis.com:2053/server';
+    const API_URL = 'https://s3nlldgkmodi.usemoralis.com:2053/server';
     const API_KEY = 'cOep3uCa15236HwUfmeHmvLtTiNBy3t2ePpveLsk';
     var globalUser;
+    var selectedFile;
+    var fileName;
+
     // const [receiver, setReceiver] = useState();
     // const [asset, setAsset] = useState();
     // const [tx, setTx] = useState();
@@ -71,10 +74,24 @@ function PartA() {
             })
            }
     }
-  
-    async function mintMyNFT() {
-    
+  // Polygon, Moralis, NFT functionality for creator and viwers, If we dao 
 
+ 
+  const onFileChange = event => {
+    selectedFile = event.target.files[0];
+    console.log(selectedFile)
+    fileName = selectedFile.name;     
+   }
+
+    async function mintMyNFT() {
+      await Moralis.start({ serverUrl: API_URL, appId: API_KEY });
+   
+      console.log("SelectedFIle"+selectedFile);
+      console.log("File Name"+fileName);
+      const file = new Moralis.File(fileName, selectedFile);
+      console.log("Uploading file... ")
+      await file.saveIPFS();
+      console.log(file.ipfs(), file.hash())
     }
   
     return (
@@ -108,9 +125,13 @@ function PartA() {
               }}
             />
           </div>
-          {/* <div class="input-group mb-3">
-            <input type="file" disabled = "true" id="file">
-          </div> */}
+          <div class="input-group mb-3">
+            <input type="file" onChange={onFileChange} onClick={(event)=> { 
+               event.target.value = null
+          }} id="file"/>
+              
+          </div>
+          
          
           <Button
             type="primary"
