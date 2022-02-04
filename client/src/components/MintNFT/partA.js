@@ -92,6 +92,9 @@ function PartA() {
       console.log("Uploading file... ")
       await file.saveIPFS();
       console.log(file.ipfs(), file.hash())
+
+      
+
     }
 
     async function connectContract(_uri){

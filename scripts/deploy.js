@@ -3,19 +3,18 @@ const hre = require("hardhat");
 async function main() {
     const [deployer] = await hre.ethers.getSigners();
 
-    const CreatorNft = await hre.ethers.getContractFactory("CreatorNFT");
-    const creatorNft = await CreatorNFT.deploy();
+    const CreatorNfT = await hre.ethers.getContractFactory("CreatorNFT");
+    const creatorNFTContract = await CreatorNfT.deploy();
 
-    await sampleContract.deployed();
-    console.log("Sample Contract address:", sampleContract.address);
+    await creatorNFTContract.deployed();
+    console.log("Creator NFT contract address:", creatorNFTContract.address);
 
-    saveFrontendFiles(sampleContract);
-
+    saveFrontendFiles(creatorNFTContract);
 }
 
 function saveFrontendFiles(contract) {
     const fs = require("fs");
-    const contractsDir = __dirname + "/../src/abis";
+    const contractsDir = __dirname + "/../client/src/abi";
 
     if (!fs.existsSync(contractsDir)) {
         fs.mkdirSync(contractsDir);
@@ -23,14 +22,14 @@ function saveFrontendFiles(contract) {
 
     fs.writeFileSync(
         contractsDir + "/contract-address.json",
-        JSON.stringify({ SampleContract: contract.address }, undefined, 2)
+        JSON.stringify({ CreatorNFT: contract.address }, undefined, 2)
     );
 
-    const SampleContractArtifact = artifacts.readArtifactSync("SampleContract");
+    const CreatorNFTArtifact = artifacts.readArtifactSync("CreatorNFT");
 
     fs.writeFileSync(
-        contractsDir + "/SampleContract.json",
-        JSON.stringify(SampleContractArtifact, null, 2)
+        contractsDir + "/CreatorNFT.json",
+        JSON.stringify(CreatorNFTArtifact, null, 2)
     );
 }
 
