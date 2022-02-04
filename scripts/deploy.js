@@ -3,8 +3,8 @@ const hre = require("hardhat");
 async function main() {
     const [deployer] = await hre.ethers.getSigners();
 
-    const SampleContract = await hre.ethers.getContractFactory("SampleContract");
-    const sampleContract = await SampleContract.deploy();
+    const CreatorNft = await hre.ethers.getContractFactory("CreatorNFT");
+    const creatorNft = await CreatorNFT.deploy();
 
     await sampleContract.deployed();
     console.log("Sample Contract address:", sampleContract.address);

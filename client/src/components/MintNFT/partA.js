@@ -92,6 +92,20 @@ function PartA() {
       console.log("Uploading file... ")
       await file.saveIPFS();
       console.log(file.ipfs(), file.hash())
+
+      
+
+    }
+
+    async function connectContract(_uri){
+      const encodedFunction = web3.eth.abi.encodedFunction({
+        name: "mintToken",
+        type: "function",
+        inputs: [{
+          type: "string",
+          name: "tokenURI"
+        }]
+      })
     }
   
     return (

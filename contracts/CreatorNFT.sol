@@ -1,4 +1,4 @@
-//SPDX License Identifier: MIT
+//SPDX-License-Identifier: UNLICENSED
 
 pragma solidity ^0.8.0;
 
@@ -26,34 +26,36 @@ contract CreatorNFT is Ownable, ERC721URIStorage{
     mapping(uint256 => address) ownerOfToken;
     mapping(address => uint256) tokenOwner;
     mapping(uint256 => string) private tokenURIs;
+    mapping(uint256 => address) approvedTokens;
 
     constructor() ERC721(tokenName, tokenSymbol) {
-        //tokenId.increment();
-        //_mint(msg.sender, tokenId.current());
-        //tokenOwner[msg.sender] = tokenId.current();
+
     }
 
-    function mintToken(string memory tokenURI) public returns (uint256) {
+
+    /**
+    * @dev Mint Function: Mints 1 tokenId, each time it is going to be incremented by 1
+    */
+
+    function mintToken(string memory _tokenURI) public returns (uint256) {
         tokenId.increment();
 
         uint256 newTokenId = tokenId.current();
         _safeMint(msg.sender, newTokenId);
-        _setTokenURI(newTokenId, tokenURI);
+        _setTokenURI(newTokenId, _tokenURI);
 
         return newTokenId;
     }
 
-    function ownerOf(uint256 _tokenId)  override public view onlyOwner returns  (address){
+    function ownerOf(uint256 _tokenId)  override public view returns  (address){
         return ownerOfToken[_tokenId];
     }
 
-    function transfer(address to) public {
-        transferFrom(msg.sender, to, tokenOwner[msg.sender]);
-        ownerOfToken[tokenId.current()] = to;
-        tokenOwner[to] = tokenId.current();
+    function transfer(address to, uint256 _tokenId) public {
+        transferFrom(msg.sender, to, _tokenId);
     }
 
-    // get function tokenURI here
+    //function tokenURI here
     function tokenURI(uint256 __tokenId) public override view returns(string memory ){
         require(_exists(__tokenId), "ERC721URIStorage: URI query for nonexistent token");
 
@@ -61,12 +63,27 @@ contract CreatorNFT is Ownable, ERC721URIStorage{
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, __tokenId.toString())) : "";
     }
 
-    // We want all tokenURI for the frontend to display to the User, should we include the mapping?
+    /**
+    * @dev function approve: With this function the owner of the NFT approves another address
+    * The new approved address is now able to take control of this NFT as well
+     */
 
-    // If we want to add _safeMint instead of _mint we will need to onERC721 Received as data?
-    // There are 2 types of this function ins the ERC721 file
+    function approve(address _approved, uint256 _tokenId ) override public {
+        require(_own(msg.sender, _tokenId), "You need to own this token in order to approve it! ");
 
-    // Do we need the approve function here?
+        approvedTokens[_tokenId] == _approved; 
+
+        emit Approval(msg.sender, _approved, _tokenId); // We Emit the Approval event here
+    }
+    /** 
+    * @dev Function _own: This function checks the owner of each tokenId,
+    * Added this for requirement statements
+    */
+    function _own(address _claimant, uint256 _tokenId) private view returns(bool){
+        require(ownerOfToken[_tokenId] == _claimant);
+        return true;
+    }
+
 
 
 }
