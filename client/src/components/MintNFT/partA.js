@@ -3,8 +3,14 @@ import Text from "antd/lib/typography/Text";
 import { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 import  { Moralis } from 'moralis';
-//const web3 = new Web3(window.ethereum);
+import {any} from '../../../src/abi/CreatorNFT.json'
+const ethers = require('ethers');
 
+// Import the json file from build to get the abi
+const contractJson = require('../../../src/abi/CreatorNFT.json');
+const contractAddressJson = require('../../../src/abi/contract-address.json');
+const contractAbi = contractJson.abi
+const contractAddress = contractAddressJson.CreatorNFT 
 
 const styles = {
     card: {
@@ -83,7 +89,7 @@ function PartA() {
     fileName = selectedFile.name;     
    }
 
-    async function mintMyNFT() {
+    async function uploadDataAndMintNFT() {
       await Moralis.start({ serverUrl: API_URL, appId: API_KEY });
    
       console.log("SelectedFIle"+selectedFile);
@@ -93,19 +99,51 @@ function PartA() {
       await file.saveIPFS();
       console.log(file.ipfs(), file.hash())
 
-      
+      const imageURI = file.ipfs();
+
+      const metadata = {
+        "channel_name": "AffinityCreator",
+        "description": "We are different videos regarding building creator contracts",
+        "image":imageURI
+      }
+      const metadataFile = new Moralis.File("metadata.json", {base64 : btoa(JSON.stringify(metadata))});
+      await metadataFile.saveIPFS();
+      const metadataURI = metadataFile.ipfs();
+
+      console.log("Metadata URI"+metadataURI)
+      console.log(JSON.stringify(contractAbi))
+
+      const txt = await mintToken(metadataURI)      
 
     }
 
-    async function connectContract(_uri){
-      const encodedFunction = web3.eth.abi.encodedFunction({
-        name: "mintToken",
-        type: "function",
-        inputs: [{
-          type: "string",
-          name: "tokenURI"
-        }]
-      })
+    async function mintToken(_uri){
+
+      const signer = (new ethers.providers.Web3Provider(window.ethereum)).getSigner();
+      const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+      await contract.mintToken(_uri)
+      
+      console.log("Minted Token")
+      
+      // const encodedFunction = contractAbi.encodeFunctionCall({
+      //   name: "mintToken",
+      //   type: "function",
+      //   inputs: [{
+      //     type: 'string',
+      //     name: 'tokenURI'
+      //     }]
+      // }, [_uri]);
+
+      // const transactionParameters = {
+      //   to: contractAddress,
+      //   from: ethereum.selectedAddress,
+      //   data: encodedFunction
+      // };
+      // const txt = await ethereum.request({
+      //   method: 'eth_sendTransaction',
+      //   params: [transactionParameters]
+      // });
+      // return txt
     }
   
     return (
@@ -163,7 +201,7 @@ function PartA() {
             size="large"
           //  loading={isPending}
             style={{ width: "50%", marginTop: "25px" }}
-            onClick={() => mintMyNFT()}
+            onClick={() => uploadDataAndMintNFT()}
           //  disabled={!tx}
           >
             Upload NFT 💸
