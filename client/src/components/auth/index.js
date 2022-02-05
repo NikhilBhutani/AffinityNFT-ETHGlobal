@@ -4,27 +4,30 @@ import card1 from "../cards/card1.png";
 import card2 from "../cards/card6.png";
 import card3 from "../cards/card3.png";
 import card4 from "../cards/card7.png";
-
+let buttonText = ""
 function Auth() {
-  const API_URL = "https://s3nlldgkmodi.usemoralis.com:2053/server";
-  const API_KEY = "cOep3uCa15236HwUfmeHmvLtTiNBy3t2ePpveLsk";
+   var globalUser; 
   var globalUser;
+   var globalUser; 
 
-  const [userAuth, setUserAuth] = useState(false);
-
+  const currentUser = Moralis.User.current();
+  if(currentUser){
+   let address = currentUser.get("ethAddress")
+   console.log("Here ")
+    buttonText = address.substring(0,4)+"...."+address.substring(address.length-4, address.length)
+  }else {
+    buttonText = "Connect Wallet"
+  }
+ 
   async function startMoralisAndLogin() {
-    await Moralis.start({ serverUrl: API_URL, appId: API_KEY });
-
-    const currentUser = Moralis.User.current();
     if (currentUser) {
-      console.log("User already logged in");
-      console.log(currentUser.get("ethAddress"));
       globalUser = currentUser;
       window.location.href = "/homepage";
     } else {
       Moralis.authenticate().then((user) => {
         console.log(user.get("ethAddress"));
         globalUser = user;
+        window.location.href = "/homepage";
       });
     }
   }
@@ -45,7 +48,7 @@ function Auth() {
             onClick={startMoralisAndLogin}
             className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-2xl font-semibold text-2xl"
           >
-            Connect Wallet
+            {buttonText}
           </button>
 
           <div className="cards mt-24 py-24">

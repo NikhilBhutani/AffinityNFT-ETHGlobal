@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Moralis } from "moralis";
 import {
   BrowserRouter,
   Routes,
@@ -13,7 +14,10 @@ import Login from '../src/components/login';
 import CreateChannel from '../src/components/create';
 import Auth from '../src/components/auth';
 import ChannelView from '../src/components/view';
-
+const API_URL = "https://s3nlldgkmodi.usemoralis.com:2053/server";
+const API_KEY = "cOep3uCa15236HwUfmeHmvLtTiNBy3t2ePpveLsk";
+Moralis.start({ serverUrl: API_URL, appId: API_KEY });
+  
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
