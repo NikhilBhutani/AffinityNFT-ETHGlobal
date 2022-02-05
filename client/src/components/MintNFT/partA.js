@@ -133,8 +133,19 @@ function PartA() {
         // console.log("Polygon NFT "+polygonNFTs.total);
       const signer = (new ethers.providers.Web3Provider(window.ethereum)).getSigner();
       const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-      const uri = await contract.getTokenURI(signer._address);
-      console.log(uri);
+      const address = await signer.getAddress()
+      console.log("Signer "+address);
+       const uri = await contract.getTokenURI(address);
+       const res = await fetch(uri)
+       const json = await res.json()
+      console.log(+json['channel_name'])
+        
+
+      // .then(response => 
+      //    console.log("Im here");
+      //   response.json()
+      //   ).then(data => console.log("sadasd",data));
+      //console.log(Json.parse(uri));
     }
   
     return (
