@@ -24,7 +24,7 @@ contract CreatorNFT is Ownable, ERC721URIStorage{
    Counters.Counter private tokenId;
 
     mapping(uint256 => address) ownerOfToken;
-    mapping(address => uint256) tokenOwner;
+    mapping(address => string) tokenURIOfOwner;
     mapping(uint256 => string) private tokenURIs;
     mapping(uint256 => address) approvedTokens;
 
@@ -44,12 +44,12 @@ contract CreatorNFT is Ownable, ERC721URIStorage{
         uint256 newTokenId = tokenId.current();
         _safeMint(msg.sender, newTokenId);
         _setTokenURI(newTokenId, _tokenURI);
-         
+        tokenURIOfOwner[msg.sender] = _tokenURI;
         return newTokenId;
     }
 
-    function ownerOf(uint256 _tokenId)  override public view returns  (address){
-        return ownerOfToken[_tokenId];
+    function getTokenURI(address _user) public view returns (string memory){
+        return tokenURIOfOwner[_user];
     }
 
     function transfer(address to, uint256 _tokenId) public {

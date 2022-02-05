@@ -128,9 +128,13 @@ function PartA() {
     async function getNFTOfOwner(){
    
        // get polygon NFTs for address
-        const options = { chain: 'mumbai', address: '0x6e844c3f3a83748df2af51237506554f7adac85a' };
-        const polygonNFTs = await Moralis.Web3API.account.getNFTs(options);
-        console.log("Polygon NFT "+polygonNFTs.total);
+        // const options = { chain: 'mumbai', address: '0x6e844c3f3a83748df2af51237506554f7adac85a' };
+        // const polygonNFTs = await Moralis.Web3API.account.getNFTs(options);
+        // console.log("Polygon NFT "+polygonNFTs.total);
+      const signer = (new ethers.providers.Web3Provider(window.ethereum)).getSigner();
+      const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+      const uri = await contract.getTokenURI(signer._address);
+      console.log(uri);
     }
   
     return (
