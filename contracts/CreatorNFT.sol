@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: UNLICENSED
 
 pragma solidity ^0.8.0;
-
+import "hardhat/console.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 //import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
@@ -39,11 +39,12 @@ contract CreatorNFT is Ownable, ERC721URIStorage{
 
     function mintToken(string memory _tokenURI) public returns (uint256) {
         tokenId.increment();
-
+        console.log('Token URI ',_tokenURI);
+        console.log('Token ID ', tokenId.current());
         uint256 newTokenId = tokenId.current();
         _safeMint(msg.sender, newTokenId);
         _setTokenURI(newTokenId, _tokenURI);
-
+         
         return newTokenId;
     }
 
@@ -54,36 +55,5 @@ contract CreatorNFT is Ownable, ERC721URIStorage{
     function transfer(address to, uint256 _tokenId) public {
         transferFrom(msg.sender, to, _tokenId);
     }
-
-    //function tokenURI here
-    function tokenURI(uint256 __tokenId) public override view returns(string memory ){
-        require(_exists(__tokenId), "ERC721URIStorage: URI query for nonexistent token");
-
-        string memory baseURI = _baseURI(); // baseURI is just an empty string like ""
-        return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, __tokenId.toString())) : "";
-    }
-
-    /**
-    * @dev function approve: With this function the owner of the NFT approves another address
-    * The new approved address is now able to take control of this NFT as well
-     */
-
-    function approve(address _approved, uint256 _tokenId ) override public {
-        require(_own(msg.sender, _tokenId), "You need to own this token in order to approve it! ");
-
-        approvedTokens[_tokenId] == _approved; 
-
-        emit Approval(msg.sender, _approved, _tokenId); // We Emit the Approval event here
-    }
-    /** 
-    * @dev Function _own: This function checks the owner of each tokenId,
-    * Added this for requirement statements
-    */
-    function _own(address _claimant, uint256 _tokenId) private view returns(bool){
-        require(ownerOfToken[_tokenId] == _claimant);
-        return true;
-    }
-
-
 
 }
