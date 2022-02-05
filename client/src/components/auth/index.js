@@ -23,11 +23,13 @@ function Auth() {
     if (currentUser) {
       globalUser = currentUser;
       window.location.href = "/homepage";
+     // Moralis.User.logOut();
     } else {
       Moralis.authenticate().then((user) => {
         console.log(user.get("ethAddress"));
         globalUser = user;
         window.location.href = "/homepage";
+        
       });
     }
   }
