@@ -110,40 +110,27 @@ function PartA() {
       await metadataFile.saveIPFS();
       const metadataURI = metadataFile.ipfs();
 
-      console.log("Metadata URI"+metadataURI)
-      console.log(JSON.stringify(contractAbi))
+     // console.log("Metadata URI"+metadataURI)
+     // console.log(JSON.stringify(contractAbi))
 
-      const txt = await mintToken(metadataURI)      
-
+      await mintToken(metadataURI)  
     }
 
     async function mintToken(_uri){
-
+      console.log("Metadata URI "+_uri)
       const signer = (new ethers.providers.Web3Provider(window.ethereum)).getSigner();
       const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-      await contract.mintToken(_uri)
+      const txt = await contract.mintToken(_uri)
       
-      console.log("Minted Token")
-      
-      // const encodedFunction = contractAbi.encodeFunctionCall({
-      //   name: "mintToken",
-      //   type: "function",
-      //   inputs: [{
-      //     type: 'string',
-      //     name: 'tokenURI'
-      //     }]
-      // }, [_uri]);
+      console.log("Minted Token "+Object.keys(txt))
+    }
 
-      // const transactionParameters = {
-      //   to: contractAddress,
-      //   from: ethereum.selectedAddress,
-      //   data: encodedFunction
-      // };
-      // const txt = await ethereum.request({
-      //   method: 'eth_sendTransaction',
-      //   params: [transactionParameters]
-      // });
-      // return txt
+    async function getNFTOfOwner(){
+   
+       // get polygon NFTs for address
+        const options = { chain: 'mumbai', address: '0x6e844c3f3a83748df2af51237506554f7adac85a' };
+        const polygonNFTs = await Moralis.Web3API.account.getNFTs(options);
+        console.log("Polygon NFT "+polygonNFTs.total);
     }
   
     return (
@@ -205,6 +192,16 @@ function PartA() {
           //  disabled={!tx}
           >
             Upload NFT 💸
+          </Button>
+          <Button
+            type="primary"
+            size="large"
+          //  loading={isPending}
+            style={{ width: "50%", marginTop: "25px" }}
+            onClick={() => getNFTOfOwner()}
+          //  disabled={!tx}
+          >
+            Get NFT Of Owner 💸
           </Button>
         </div>
       </div>
