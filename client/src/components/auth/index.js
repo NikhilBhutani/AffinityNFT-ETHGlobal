@@ -1,15 +1,21 @@
-import { useState } from 'react';
 import { Moralis } from "moralis";
 import card1 from "../cards/card1.png";
 import card2 from "../cards/card6.png";
 import card3 from "../cards/card3.png";
 import card4 from "../cards/card7.png";
+const ethers = require('ethers');
+const contractJson = require('../../../src/abi/CreatorNFT.json');
+const contractAddressJson = require('../../../src/abi/creator-contract-address.json');
+const contractAbi = contractJson.abi
+const contractAddress = contractAddressJson.CreatorNFT 
+const signer = (new ethers.providers.Web3Provider(window.ethereum)).getSigner();
+const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 let buttonText = ""
+
+
 function Auth() {
    var globalUser; 
-  var globalUser;
-   var globalUser; 
-
+   
   const currentUser = Moralis.User.current();
   if(currentUser){
    let address = currentUser.get("ethAddress")
@@ -19,23 +25,35 @@ function Auth() {
     buttonText = "Connect Wallet"
   }
  
-  async function startMoralisAndLogin() {
-    if (currentUser) {
+  async function login() {
+
+    if (!currentUser) {
       globalUser = currentUser;
-      window.location.href = "/homepage";
+    //  window.location.href = "/homepage";
      // Moralis.User.logOut();
-    } else {
-      Moralis.authenticate().then((user) => {
-        console.log(user.get("ethAddress"));
-        globalUser = user;
-        window.location.href = "/homepage";
-        
-      });
-    }
+     Moralis.authenticate().then((user) => {
+      console.log(user.get("ethAddress"));
+      globalUser = user;      
+    });
+    } 
+
+    redirect()
   }
 
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [user, setUser] = useState;
+  async function redirect(){
+    const signer = (new ethers.providers.Web3Provider(window.ethereum)).getSigner();
+    const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+    const address = await signer.getAddress()
+       console.log("Signer "+address);
+        const uri = await contract.getTokenURI(address);
+         console.log(uri)
+
+         if(uri === ""){
+          window.location.href = "/user";
+         }else {
+          window.location.href = "/homepage";
+         }
+  }
 
   return (
     <div className="auth bg-purple-100">
@@ -47,7 +65,7 @@ function Auth() {
             </h1>
           </div>
           <button
-            onClick={startMoralisAndLogin}
+            onClick={login}
             className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-2xl font-semibold text-2xl"
           >
             {buttonText}

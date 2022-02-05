@@ -13,10 +13,14 @@ import Login from '../src/components/login';
 import CreateChannel from '../src/components/create';
 import Auth from '../src/components/auth';
 import ChannelView from '../src/components/view';
+import Add from '../src/components/add';
+import User from '../src/components/user';
+
 const API_URL = "https://s3nlldgkmodi.usemoralis.com:2053/server";
 const API_KEY = "cOep3uCa15236HwUfmeHmvLtTiNBy3t2ePpveLsk";
 Moralis.start({ serverUrl: API_URL, appId: API_KEY });
   
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -28,6 +32,8 @@ ReactDOM.render(
         <Route path="/create" element={<CreateChannel />} />
         <Route path='/auth' element={<Auth />} />
         <Route path='/homepage' element={<ChannelView />} />
+        <Route path='/add' element={<Add />} />
+        <Route path='/user' element={<User />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
