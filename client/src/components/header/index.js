@@ -21,9 +21,9 @@ function header() {
             <a href="/tokenomics" className="mr-5 hover:text-gray-900">
               Tokenomics
             </a>
-            <a href="/whitepaper" className="mr-5 hover:text-gray-900">
+            {/* <a href="/whitepaper" className="mr-5 hover:text-gray-900">
               Whitepaper
-            </a>
+            </a> */}
           </div>
         </div>
 

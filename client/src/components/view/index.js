@@ -19,35 +19,13 @@ function Channel() {
             </a>
           </div>
           <div className="w-3/5">
-            <div className="relative">
-              <input
-                type="text"
-                className="h-8 p-4 text-sm w-full border"
-                placeholder="Search"
-              />
-              <span className="flex items-center bg-grey-lightest hover:bg-grey-lighter absolute pin-r pin-y border px-8">
-                <i className="fa fa-search text-grey-dark"></i>
-              </span>
-            </div>
+            
           </div>
           <div className="w-1/5">
             <div className="flex items-center justify-end">
-              <a href="/" className="mr-6">
-                <i className="fa fa-upload fa-lg" aria-hidden="true"></i>
-              </a>
-              <a href="/" className="mr-6">
-                <i className="fa fa-th fa-lg" aria-hidden="true"></i>
-              </a>
-              <a href="/" className="mr-6">
-                <i className="fa fa-bell fa-lg" aria-hidden="true"></i>
-              </a>
-              <a href="/">
-                <img
-                  className="h-8 w-8 rounded-full"
-                  src="https://yt3.ggpht.com/-d4QhdOi4N6c/AAAAAAAAAAI/AAAAAAAAAAA/vpG4T-iVv7w/s88-c-k-no-mo-rj-c0xffffff/photo.jpg"
-                  alt="avatar"
-                />
-              </a>
+              <button className="flex mx-auto m-2 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-md font-semibold text-md">
+                My Wallet Address
+              </button>
             </div>
           </div>
         </div>

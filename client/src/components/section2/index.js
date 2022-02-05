@@ -32,23 +32,7 @@ function section2() {
                     MoreVP) - with an account based implementation, Polygon supports all the existing Ethereum tooling
                     along with faster and cheaper transactions{" "}
                   </p>
-                  <a
-                    href="/"
-                    className="mt-3 text-indigo-500 inline-flex items-center"
-                  >
-                    Learn More
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      className="w-4 h-4 ml-2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7"></path>
-                    </svg>
-                  </a>
+                  
                 </div>
               </div>
             </div>
@@ -323,23 +307,7 @@ function section2() {
                     blockchains are invented, your dApp will instantly work on
                     any chain.{" "}
                   </p>
-                  <a
-                    href="https://moralis.io/"
-                    className="mt-3 text-indigo-500 inline-flex items-center"
-                  >
-                    Learn More
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      className="w-4 h-4 ml-2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7"></path>
-                    </svg>
-                  </a>
+                  
                 </div>
               </div>
             </div>
@@ -363,23 +331,7 @@ function section2() {
                     workflow. This means compiling, running and testing smart
                     contracts at the very core.{" "}
                   </p>
-                  <a
-                    href="https://hardhat.org/"
-                    className="mt-3 text-indigo-500 inline-flex items-center"
-                  >
-                    Learn More
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      className="w-4 h-4 ml-2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7"></path>
-                    </svg>
-                  </a>
+                  
                 </div>
               </div>
             </div>
