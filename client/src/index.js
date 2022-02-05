@@ -9,7 +9,7 @@ import App from './App';
 import MintNFT from './components/MintNFT/partA'
 import Home from '../src/components/Home';
 import Login from '../src/components/login';
-import Channel from '../src/components/channel';
+//import Channel from '../src/components/channel'; <Route path="/channel" element={<Channel />} />
 import CreateChannel from '../src/components/create';
 
 ReactDOM.render(
@@ -20,7 +20,6 @@ ReactDOM.render(
         <Route path="/mintnft" element={<MintNFT />}/>
         <Route path="/playground" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/channel" element={<Channel />} />
         <Route path="/create" element={<CreateChannel />} />
       </Routes>
     </BrowserRouter>
