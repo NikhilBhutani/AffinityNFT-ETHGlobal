@@ -1,4 +1,13 @@
+import { useState } from "react";
+
 function CreateChannel() {
+  const [submitStatus, setSubmitStatus] = useState(false);
+
+  const handleSubmit = () => {
+    setSubmitStatus(true);
+    // The logic to submit the info
+  };
+
   return (
     <div className="create bg-purple-100">
       <div className="relative font-medium md:h-screen flex items-center content-center">
@@ -62,8 +71,15 @@ function CreateChannel() {
                 <button
                   type="button"
                   className="bg-purple-500 hover:bg-purple-600 shadow-lg text-white font-semibold text-sm py-3 px-0 rounded text-center w-full hover:bg-tertiary duration-200 transition-all"
+                  onClick={() => handleSubmit()}
                 >
-                  Create Channel
+                  {submitStatus ? (
+                    <>
+                      <SpinningCircleLoader /> Submitting
+                    </>
+                  ) : (
+                    "Submit"
+                  )}
                 </button>
               </div>
             </div>

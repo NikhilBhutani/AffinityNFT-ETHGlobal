@@ -8,7 +8,7 @@ function section2() {
               AFFINITY DAO
             </h2>
             <h1 className="sm:text-3xl text-2xl font-medium title-font text-gray-900">
-              What makes us unique
+              Our Ecosystem
             </h1>
           </div>
           <div className="flex flex-wrap -m-4">

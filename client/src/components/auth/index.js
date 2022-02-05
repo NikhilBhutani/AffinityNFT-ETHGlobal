@@ -20,7 +20,7 @@ function Auth() {
       console.log("User already logged in");
       console.log(currentUser.get("ethAddress"));
       globalUser = currentUser;
-      window.location.href = "/create";
+      window.location.href = "/homepage";
     } else {
       Moralis.authenticate().then((user) => {
         console.log(user.get("ethAddress"));
