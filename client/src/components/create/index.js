@@ -1,10 +1,19 @@
+import { useState } from "react";
+
 function CreateChannel() {
+  const [submitStatus, setSubmitStatus] = useState(false);
+
+  const handleSubmit = () => {
+    setSubmitStatus(true);
+    // The logic to submit the info
+  };
+
   return (
-    <div className="create bg-gray-200">
+    <div className="create bg-purple-100">
       <div className="relative font-medium md:h-screen flex items-center content-center">
         <div className="mr-auto ml-auto w-full">
           <div className="w-full max-w-md mr-auto ml-auto mt-4 mb-1 text-center">
-            <h1 className="text-gray-800 block text-3xl font-extrabold font-title">
+            <h1 className="text-gray-800 block text-3xl font-extrabold font-2xl">
               Create Channel
             </h1>
           </div>
@@ -19,10 +28,25 @@ function CreateChannel() {
                   Channel Name{" "}
                 </label>
                 <input
-                  className="shadow-sm appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300"
+                  className="shadow-sm appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-purple-500"
                   id="channelName"
                   type="text"
                   placeholder="My Channel Name"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-medium mb-2"
+                  htmlFor="username"
+                >
+                  {" "}
+                  Channel Description{" "}
+                </label>
+                <input
+                  className="shadow-sm appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-purple-500"
+                  id="channelDescription"
+                  type="text"
+                  placeholder="My Channel Description"
                 />
               </div>
               <div className="mb-6">
@@ -34,7 +58,7 @@ function CreateChannel() {
                   Channel Image{" "}
                 </label>
                 <input
-                  className="shadow-sm appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300"
+                  className="shadow-sm appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-purple-500"
                   id="channelLogo"
                   type="file"
                   name="channelLogo"
@@ -42,17 +66,22 @@ function CreateChannel() {
                   placeholder="Channel Image"
                 />
               </div>
-              
+
               <div className="mb-6">
                 <button
                   type="button"
-                  className="bg-indigo-500 hover:bg-indigo-600 shadow-lg text-white font-semibold text-sm py-3 px-0 rounded text-center w-full hover:bg-tertiary duration-200 transition-all"
+                  className="bg-purple-500 hover:bg-purple-600 shadow-lg text-white font-semibold text-sm py-3 px-0 rounded text-center w-full hover:bg-tertiary duration-200 transition-all"
+                  onClick={() => handleSubmit()}
                 >
-                  Create Channel
+                  {submitStatus ? (
+                    <>
+                      <SpinningCircleLoader /> Submitting
+                    </>
+                  ) : (
+                    "Submit"
+                  )}
                 </button>
               </div>
-              
-              
             </div>
           </div>
         </div>

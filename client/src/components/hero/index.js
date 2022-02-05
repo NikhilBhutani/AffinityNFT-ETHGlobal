@@ -1,3 +1,4 @@
+import logo from '../cards/Affinity.png'
 function hero() {
   return (
     <div className="hero">
@@ -26,7 +27,7 @@ function hero() {
             </div>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img src="" alt="" className="object-cover object-center rounded" />
+            <img src={logo} alt="Affinity Logo" className="object-cover object-center rounded" />
           </div>
         </div>
       </section>
