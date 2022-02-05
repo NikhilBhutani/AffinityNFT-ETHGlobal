@@ -10,7 +10,6 @@ import App from './App';
 import MintNFT from './components/MintNFT/partA'
 import Home from '../src/components/Home';
 import Login from '../src/components/login';
-//import Channel from '../src/components/channel'; <Route path="/channel" element={<Channel />} />
 import CreateChannel from '../src/components/create';
 import Auth from '../src/components/auth';
 import ChannelView from '../src/components/view';
