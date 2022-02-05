@@ -6,7 +6,7 @@ function CreateChannel() {
 
   const handleSubmit = () => {
     setSubmitStatus(true);
-    // The logic to submit the info
+    // The logic to submit the info. Set 'setSubmitStatus' to true if a positive feedback is received.
   };
 
   return (

@@ -12,7 +12,6 @@ function App() {
       <Header />
       <Hero />
       <Section2 />
-      <Timeline />
       <Tokenomics />
       <Footer />
     </div>
