@@ -24,7 +24,7 @@ function saveCreatorFEFiles(contract) {
     }
 
     fs.writeFileSync(
-        contractsDir + "/contract-address.json",
+        contractsDir + "/creator-contract-address.json",
         JSON.stringify({ CreatorNFT: contract.address }, undefined, 2)
     );
 
@@ -55,7 +55,7 @@ function saveRewardFEFiles(contract) {
     }
 
     fs.writeFileSync(
-        contractsDir + "/contract-address.json",
+        contractsDir + "/reward-contract-address.json",
         JSON.stringify({ RewardNFT: contract.address }, undefined, 2)
     );
 
