@@ -1,20 +1,28 @@
 import logo from "../cards/Affinity.png";
 import card1 from "../cards/card1.png";
 import card2 from "../cards/card2.png";
-import  { Moralis } from 'moralis';
-const contractAddressJson = require('../../../src/abi/creator-contract-address.json');
+import Card from "../card";
+import { Moralis } from "moralis";
+const contractAddressJson = require("../../../src/abi/creator-contract-address.json");
 function User() {
-
- async function redirectToCreateChannelPage(){
-   console.log("Go to create channel")
+  var items = [];
+  async function redirectToCreateChannelPage() {
+    console.log("Go to create channel");
     window.location.href = "/create";
- }
-getContentCreatorNFTs()
-async function getContentCreatorNFTs(){
-  const options = { address: contractAddressJson.CreatorNFT, chain: "mumbai" };
-  const NFTs = await Moralis.Web3API.token.getAllTokenIds(options);
-  console.log(NFTs);
-}
+  }
+  getContentCreatorNFTs();
+  async function getContentCreatorNFTs() {
+    const options = {
+      address: contractAddressJson.CreatorNFT,
+      chain: "mumbai",
+    };
+    const NFTs = await Moralis.Web3API.token.getAllTokenIds(options);
+    console.log(NFTs);
+    items = NFTs.result;
+    // this.state = {
+    //   items: NFTs.result,
+    // };
+  }
 
   return (
     <div className="bg-white font-sans">
@@ -34,7 +42,10 @@ async function getContentCreatorNFTs(){
           <div className="w-3/5"></div>
           <div className="w-1/5">
             <div className="flex items-center justify-end">
-              <button onClick = {redirectToCreateChannelPage} className="flex mx-auto m-2 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-md font-semibold text-md">
+              <button
+                onClick={redirectToCreateChannelPage}
+                className="flex mx-auto m-2 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-md font-semibold text-md"
+              >
                 Become a creator
               </button>
             </div>
@@ -46,172 +57,14 @@ async function getContentCreatorNFTs(){
         <div className="w-full mx-16 py-6">
           <div className="border-b">
             <h3 className="py-6 text-base font-medium">Videoos</h3>
+            <div className="flex mb-4 relative"></div>
             <div className="flex mb-4 relative">
-              <div className="flex-1 mr-1">
-                <div>
-                  <img src={card1} alt="" />
-                </div>
-                <div className="mb-4">
-                  <h4 className="text-sm font-medium">Video One</h4>
-                  <p className="mt-2 font-hairline text-sm text-grey-darker">
-                    Affinity Tech
-                    <span className="w-3 h-3 text-white inline-block text-center rounded-full bg-grey-dark text-2xs">
-                      &#10003;
-                    </span>
-                  </p>
-                  <p className="mt-1 font-hairline text-xs text-grey-darker">
-                    336K views &middot; 2 years ago
-                  </p>
-                  <p className="inline block p-1 text-grey-darker bg-grey-lighter font-hairline text-2xs">
-                    CC
-                  </p>
-                </div>
-              </div>
-              <div className="flex-1 mr-1">
-                <div>
-                  <img src={card1} alt="" />
-                </div>
-                <div className="mb-4">
-                  <h4 className="text-sm font-medium">Video 2</h4>
-                  <p className="mt-2 font-hairline text-sm text-grey-darker">
-                    Affinity Tech
-                    <span className="w-3 h-3 text-white inline-block text-center rounded-full bg-grey-dark text-2xs">
-                      &#10003;
-                    </span>
-                  </p>
-                  <p className="mt-1 font-hairline text-xs text-grey-darker">
-                    336K views &middot; 2 years ago
-                  </p>
-                  <p className="inline block p-1 text-grey-darker bg-grey-lighter font-hairline text-2xs">
-                    CC
-                  </p>
-                </div>
-              </div>
-              <div className="flex-1 mr-1">
-                <div>
-                  <img src={card1} alt="" />
-                </div>
-                <div className="mb-4">
-                  <h4 className="text-sm font-medium">Video 3</h4>
-                  <p className="mt-2 font-hairline text-sm text-grey-darker">
-                    Affinity Tech
-                    <span className="w-3 h-3 text-white inline-block text-center rounded-full bg-grey-dark text-2xs">
-                      &#10003;
-                    </span>
-                  </p>
-                  <p className="mt-1 font-hairline text-xs text-grey-darker">
-                    336K views &middot; 2 years ago
-                  </p>
-                  <p className="inline block p-1 text-grey-darker bg-grey-lighter font-hairline text-2xs">
-                    CC
-                  </p>
-                </div>
-              </div>
-              <div className="flex-1 mr-1">
-                <div>
-                  <img src={card1} alt="" />
-                </div>
-                <div className="mb-4">
-                  <h4 className="text-sm font-medium">Video 4</h4>
-                  <p className="mt-2 font-hairline text-sm text-grey-darker">
-                    Affinity Tech
-                    <span className="w-3 h-3 text-white inline-block text-center rounded-full bg-grey-dark text-2xs">
-                      &#10003;
-                    </span>
-                  </p>
-                  <p className="mt-1 font-hairline text-xs text-grey-darker">
-                    336K views &middot; 2 years ago
-                  </p>
-                  <p className="inline block p-1 text-grey-darker bg-grey-lighter font-hairline text-2xs">
-                    CC
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="flex mb-4 relative">
-              <div className="flex-1 mr-1">
-                <div>
-                  <img src={card1} alt="" />
-                </div>
-                <div className="mb-4">
-                  <h4 className="text-sm font-medium">Video One</h4>
-                  <p className="mt-2 font-hairline text-sm text-grey-darker">
-                    Affinity Tech
-                    <span className="w-3 h-3 text-white inline-block text-center rounded-full bg-grey-dark text-2xs">
-                      &#10003;
-                    </span>
-                  </p>
-                  <p className="mt-1 font-hairline text-xs text-grey-darker">
-                    336K views &middot; 2 years ago
-                  </p>
-                  <p className="inline block p-1 text-grey-darker bg-grey-lighter font-hairline text-2xs">
-                    CC
-                  </p>
-                </div>
-              </div>
-              <div className="flex-1 mr-1">
-                <div>
-                  <img src={card1} alt="" />
-                </div>
-                <div className="mb-4">
-                  <h4 className="text-sm font-medium">Video 2</h4>
-                  <p className="mt-2 font-hairline text-sm text-grey-darker">
-                    Affinity Tech
-                    <span className="w-3 h-3 text-white inline-block text-center rounded-full bg-grey-dark text-2xs">
-                      &#10003;
-                    </span>
-                  </p>
-                  <p className="mt-1 font-hairline text-xs text-grey-darker">
-                    336K views &middot; 2 years ago
-                  </p>
-                  <p className="inline block p-1 text-grey-darker bg-grey-lighter font-hairline text-2xs">
-                    CC
-                  </p>
-                </div>
-              </div>
-              <div className="flex-1 mr-1">
-                <div>
-                  <img src={card1} alt="" />
-                </div>
-                <div className="mb-4">
-                  <h4 className="text-sm font-medium">Video 3</h4>
-                  <p className="mt-2 font-hairline text-sm text-grey-darker">
-                    Affinity Tech
-                    <span className="w-3 h-3 text-white inline-block text-center rounded-full bg-grey-dark text-2xs">
-                      &#10003;
-                    </span>
-                  </p>
-                  <p className="mt-1 font-hairline text-xs text-grey-darker">
-                    336K views &middot; 2 years ago
-                  </p>
-                  <p className="inline block p-1 text-grey-darker bg-grey-lighter font-hairline text-2xs">
-                    CC
-                  </p>
-                </div>
-              </div>
-              <div className="flex-1 mr-1">
-                <div>
-                  <img src={card1} alt="" />
-                </div>
-                <div className="mb-4">
-                  <h4 className="text-sm font-medium">Video 4</h4>
-                  <p className="mt-2 font-hairline text-sm text-grey-darker">
-                    Affinity Tech
-                    <span className="w-3 h-3 text-white inline-block text-center rounded-full bg-grey-dark text-2xs">
-                      &#10003;
-                    </span>
-                  </p>
-                  <p className="mt-1 font-hairline text-xs text-grey-darker">
-                    336K views &middot; 2 years ago
-                  </p>
-                  <p className="inline block p-1 text-grey-darker bg-grey-lighter font-hairline text-2xs">
-                    CC
-                  </p>
-                </div>
-              </div>
+              {items.map((item) => (
+                <Card key={item.id} item={item} />
+              ))}
             </div>
 
-           {/* <div className="flex mb-4 relative">
+            {/* <div className="flex mb-4 relative">
               <div className="flex-1 mr-1">
                 <div>
                   <img src={card1} alt="" />
