@@ -3,6 +3,12 @@ import card1 from "../cards/card1.png";
 import card2 from "../cards/card2.png";
 
 function User() {
+
+ async function redirectToCreateChannelPage(){
+   console.log("Go to create channel")
+    window.location.href = "/create";
+ }
+
   return (
     <div className="bg-white font-sans">
       <nav className="py-2 shadow">
@@ -21,7 +27,7 @@ function User() {
           <div className="w-3/5"></div>
           <div className="w-1/5">
             <div className="flex items-center justify-end">
-              <button className="flex mx-auto m-2 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-md font-semibold text-md">
+              <button onClick = {redirectToCreateChannelPage} className="flex mx-auto m-2 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-md font-semibold text-md">
                 Become a creator
               </button>
             </div>

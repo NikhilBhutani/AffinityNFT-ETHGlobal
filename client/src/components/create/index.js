@@ -6,14 +6,11 @@ import mintedGif from "../../assets/fishLoading.gif";
 
 const ethers = require('ethers');
 const contractJson = require('../../../src/abi/CreatorNFT.json');
-const contractAddressJson = require('../../../src/abi/contract-address.json');
+const contractAddressJson = require('../../../src/abi/creator-contract-address.json');
 const contractAbi = contractJson.abi
 const contractAddress = contractAddressJson.CreatorNFT 
 const API_URL = 'https://s3nlldgkmodi.usemoralis.com:2053/server';
 const API_KEY = 'cOep3uCa15236HwUfmeHmvLtTiNBy3t2ePpveLsk';
-
-
-
 
 function CreateChannel() {
   const [submitStatus, setSubmitStatus] = useState(false);
@@ -23,22 +20,29 @@ function CreateChannel() {
   const [file, setFile] = useState();
   const [minted, setMinted] = useState(false);
 
+  // const creatorNFTcards = '../cards/prodcards';
+   
+
+  //  fs.readdir(creatorNFTcards, (err, files) => {
+  //    files.forEach(file => {
+  //   console.log("File ",file);
+  //   });
+  //  });
+  
   async function handleSubmit(){
     setSubmitStatus(true);
     console.log("channel name: " + channelName);
     console.log("channel Description: " + desc);
     console.log(file);
     setLoading(true);
-    // await uploadDataAndMintNFT();
-    setTimeout(() => {
-      console.log("congraulations on minting your creator NFT!");
-      setLoading(false);
-      setMinted(true);
-    }, 10000);
+    await uploadDataAndMintNFT();
+    console.log("Set Loading false")
+    setLoading(false);
+    setMinted(true);
     setTimeout(() => {
       console.log("congraulations on minting your creator NFT!");
       window.location.href = "/channel";
-    }, 20000);
+    }, 5000);
     return;
     // The logic to submit the info. Set 'setSubmitStatus' to true if a positive feedback is received.
   };

@@ -8,8 +8,6 @@ const contractJson = require('../../../src/abi/CreatorNFT.json');
 const contractAddressJson = require('../../../src/abi/creator-contract-address.json');
 const contractAbi = contractJson.abi
 const contractAddress = contractAddressJson.CreatorNFT 
-const signer = (new ethers.providers.Web3Provider(window.ethereum)).getSigner();
-const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 let buttonText = ""
 
   // async function startMoralisAndLogin() {
@@ -22,10 +20,6 @@ let buttonText = ""
   //   setUserAuth(true);
   //   return;
   // }
-
-  async function userRedirect() {
-    window.location.href = "/create";
-    return;
 
 function Auth() {
    var globalUser; 
@@ -65,7 +59,7 @@ function Auth() {
          if(uri === ""){
           window.location.href = "/user";
          }else {
-          window.location.href = "/homepage";
+          window.location.href = "/channel";
          }
   }
 
