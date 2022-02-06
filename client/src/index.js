@@ -25,8 +25,8 @@ ReactDOM.render(
         <Route path="/playground" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<CreateChannel />} />
-        <Route path='/auth' element={<Auth />} />
-        <Route path='/homepage' element={<ChannelView />} />
+        <Route path='/home' element={<Auth />} />
+        <Route path='/channel' element={<ChannelView />} />
         <Route path='/add' element={<Add />} />
         <Route path='/user' element={<User />} />
       </Routes>

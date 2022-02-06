@@ -13,20 +13,19 @@ function Auth() {
   const [userAuth, setUserAuth] = useState(false);
 
   async function startMoralisAndLogin() {
-    await Moralis.start({ serverUrl: API_URL, appId: API_KEY });
-
-    const currentUser = Moralis.User.current();
-    if (currentUser) {
-      console.log("User already logged in");
+    await Moralis.start({ serverUrl: API_URL, appId: API_KEY })
+    const currentUser = await Moralis.authenticate();
+    if(currentUser){
       console.log(currentUser.get("ethAddress"));
       globalUser = currentUser;
-      window.location.href = "/homepage";
-    } else {
-      Moralis.authenticate().then((user) => {
-        console.log(user.get("ethAddress"));
-        globalUser = user;
-      });
     }
+    setUserAuth(true);
+    return;
+  }
+
+  async function userRedirect() {
+    window.location.href = "/create";
+    return;
   }
 
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -41,13 +40,21 @@ function Auth() {
               Welcome to Affinity
             </h1>
           </div>
-          <button
-            onClick={startMoralisAndLogin}
-            className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-2xl font-semibold text-2xl"
-          >
-            Connect Wallet
-          </button>
-
+          { userAuth ? 
+            <button
+              onClick={userRedirect}
+              className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-2xl font-semibold text-2xl"
+            >
+            Become a creator!
+            </button>
+          :
+            <button
+              onClick={startMoralisAndLogin}
+              className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-2xl font-semibold text-2xl"
+            >
+              Connect Wallet
+            </button>
+          }
           <div className="cards mt-24 py-24">
             <div className="flex flex-wrap -m-4 justify-evenly align-center">
               <div className="p-4 md:w-1/4 sm:w-2/4 w-2/4">

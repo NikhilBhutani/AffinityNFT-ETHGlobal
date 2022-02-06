@@ -3,6 +3,9 @@ import card1 from "../cards/card1.png";
 import card2 from "../cards/card2.png";
 
 function Channel() {
+  // onload(e => {
+  //   // get channel metadata
+  // });
   return (
     <div className="bg-white font-sans">
       <nav className="py-2 shadow">
