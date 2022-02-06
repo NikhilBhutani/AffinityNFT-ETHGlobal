@@ -26,3 +26,5 @@ yarn-error.log*
 artifacts
 cache
 *.env
+# Local Netlify folder
+.netlify
