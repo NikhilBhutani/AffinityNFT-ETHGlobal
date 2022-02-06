@@ -1,3 +1,5 @@
+import tokenomic from "../cards/token-distrib.png"
+
 function tokenomics() {
   return (
     <div className="tokenomics">
@@ -15,7 +17,7 @@ function tokenomics() {
             <img
               alt="feature"
               class="object-cover object-center h-full w-full"
-              src="https://dummyimage.com/600x600/edf2f7/a5afbd"
+              src={tokenomic}
             />
           </div>
         </div>

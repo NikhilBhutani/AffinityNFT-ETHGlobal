@@ -1,9 +1,7 @@
 import Header from './components/header';
 import Hero from './components/hero';
 import Section2 from './components/section2';
-import Timeline from './components/timeline';
 import Tokenomics from './components/tokenomics';
-import Footer from './components/footer';
 import './app.css';
 
 function App() {
@@ -12,9 +10,7 @@ function App() {
       <Header />
       <Hero />
       <Section2 />
-      <Timeline />
       <Tokenomics />
-      <Footer />
     </div>
   );
 }

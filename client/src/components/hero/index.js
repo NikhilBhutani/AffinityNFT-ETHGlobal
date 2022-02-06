@@ -1,3 +1,4 @@
+import logo from '../cards/Affinity.png'
 function hero() {
   return (
     <div className="hero">
@@ -16,17 +17,17 @@ function hero() {
               and we, the core team are head-on heels in bringing the Affinity
               DAO to reality.
             </p>
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
               <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                 Launch
               </button>
               <button className="ml-4 inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">
                 Whitepaper
               </button>
-            </div>
+            </div> */}
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img src="" alt="" className="object-cover object-center rounded" />
+            <img src={logo} alt="Affinity Logo" className="object-cover object-center rounded" />
           </div>
         </div>
       </section>

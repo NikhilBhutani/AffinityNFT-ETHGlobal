@@ -32,7 +32,7 @@ function Login() {
           >
             Creator Login
           </button>
-          <button className="rounded-lg py-8 px-12 mx-10 my-10 bg-purple-700 text-white text-2xl">
+          <button onClick={startMoralisAndLogin} className="rounded-lg py-8 px-12 mx-10 my-10 bg-purple-700 text-white text-2xl">
             Viewer Login
           </button>
         </div>

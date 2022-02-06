@@ -25,45 +25,45 @@ function CreateChannel() {
                   htmlFor="username"
                 >
                   {" "}
-                  Channel Name{" "}
+                  Content Title{" "}
                 </label>
                 <input
                   className="shadow-sm appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-purple-500"
-                  id="channelName"
+                  id="contentTitle"
                   type="text"
-                  placeholder="My Channel Name"
+                  placeholder="My Content"
                 />
               </div>
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-medium mb-2"
-                  htmlFor="username"
+                  htmlFor="description"
                 >
                   {" "}
-                  Channel Description{" "}
+                  Description{" "}
                 </label>
                 <input
                   className="shadow-sm appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-purple-500"
-                  id="channelDescription"
+                  id="description"
                   type="text"
-                  placeholder="My Channel Description"
+                  placeholder="My Content Description"
                 />
               </div>
               <div className="mb-6">
                 <label
                   className="block text-gray-700 text-sm font-medium mb-2"
-                  htmlFor="channelImage"
+                  htmlFor="contentImage"
                 >
                   {" "}
-                  Channel Image{" "}
+                  Image{" "}
                 </label>
                 <input
                   className="shadow-sm appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-purple-500"
-                  id="channelLogo"
+                  id="contentImage"
                   type="file"
-                  name="channelLogo"
-                  alt="Channel Image"
-                  placeholder="Channel Image"
+                  name="contentImage"
+                  alt="Content Image"
+                  placeholder="Content Image"
                 />
               </div>
 
