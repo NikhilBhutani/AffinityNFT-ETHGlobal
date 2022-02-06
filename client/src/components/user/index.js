@@ -1,13 +1,20 @@
 import logo from "../cards/Affinity.png";
 import card1 from "../cards/card1.png";
 import card2 from "../cards/card2.png";
-
+import  { Moralis } from 'moralis';
+const contractAddressJson = require('../../../src/abi/creator-contract-address.json');
 function User() {
 
  async function redirectToCreateChannelPage(){
    console.log("Go to create channel")
     window.location.href = "/create";
  }
+getContentCreatorNFTs()
+async function getContentCreatorNFTs(){
+  const options = { address: contractAddressJson.CreatorNFT, chain: "mumbai" };
+  const NFTs = await Moralis.Web3API.token.getAllTokenIds(options);
+  console.log(NFTs);
+}
 
   return (
     <div className="bg-white font-sans">
@@ -204,11 +211,7 @@ function User() {
               </div>
             </div>
 
-            <button className="flex mx-auto mt-16 mb-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-2xl font-semibold text-2xl">
-              Become a creator
-            </button>
-
-            <div className="flex mb-4 relative">
+           {/* <div className="flex mb-4 relative">
               <div className="flex-1 mr-1">
                 <div>
                   <img src={card1} alt="" />
@@ -372,7 +375,7 @@ function User() {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

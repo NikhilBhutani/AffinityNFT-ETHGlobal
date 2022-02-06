@@ -45,6 +45,7 @@ function CreateChannel() {
 
   async function uploadDataAndMintNFT() {
     await Moralis.start({ serverUrl: API_URL, appId: API_KEY });
+    await Moralis.authenticate();
     const image = new Moralis.File(file.name, file);
     console.log("Uploading file... ")
     await image.saveIPFS();
@@ -60,9 +61,6 @@ function CreateChannel() {
     const metadataFile = new Moralis.File("metadata.json", {base64 : btoa(JSON.stringify(metadata))});
     await metadataFile.saveIPFS();
     const metadataURI = metadataFile.ipfs();
-
-   // console.log("Metadata URI"+metadataURI)
-   // console.log(JSON.stringify(contractAbi))
 
     await mintToken(metadataURI);
     return;
