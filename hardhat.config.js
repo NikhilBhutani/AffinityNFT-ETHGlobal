@@ -7,8 +7,7 @@ require("dotenv").config();
 // Possible network values
 const TEST_NETWORK = "TEST_NETWORK"
 const LOCAL_NETWORK = "LOCAL_NETWORK"
-const mumbai_api_key = 'https://polygon-mumbai.g.alchemy.com/v2/gICZZK8gmpMq3g9-v4xe5oxUIRZdBtTY'
-const private_key = 'f21db0103bee18fd46b6c85a5b073a0b8e814983a1c0de6b0f87450634905f20'
+const private_key = PRIVATE
 // By default network is set to local, change it to TEST_NETWORK to make a switch
 const NETWORK = LOCAL_NETWORK
 
