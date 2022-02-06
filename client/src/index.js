@@ -32,7 +32,7 @@ ReactDOM.render(
         <Route path="/create" element={<CreateChannel />} />
         <Route path='/home' element={<Auth />} />
         <Route path='/channel' element={<ChannelView />} />
-        <Route path='/add' element={<Add />} />
+        <Route path='/createcontent' element={<Add />} />
         <Route path='/user' element={<User />} />
       </Routes>
     </BrowserRouter>

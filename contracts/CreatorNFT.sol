@@ -38,6 +38,10 @@ contract CreatorNFT is ERC721URIStorage, Ownable{
         return tokenURIOfOwner[_user];
     }
 
+    function updateTokenURI(string memory _newURI) public {
+        tokenURIOfOwner[msg.sender] = _newURI;
+    }
+
     function transfer(address to, uint256 _tokenId) public {
         transferFrom(msg.sender, to, _tokenId);
     }

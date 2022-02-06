@@ -2,6 +2,7 @@ import logo from "../cards/Affinity.png";
 import card1 from "../cards/card1.png";
 import card2 from "../cards/card2.png";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const ethers = require('ethers');
 const contractJson = require('../../../src/abi/CreatorNFT.json');
@@ -13,12 +14,16 @@ function Channel() {
   const [channelName, setChannelName] = useState("Loading ..");
   const [channelDesc, setChannelDesc] = useState("Loading ..");
   const [channelNFT, setChannelNFT] = useState({card1});
+  const [content, setContent] = useState([]);
+  const [contentImg, setContentImg] = useState();
+  const [contentDesc, setContentDesc] = useState("");
   const signer = (new ethers.providers.Web3Provider(window.ethereum)).getSigner();
   const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
-  init()
-  async function init(){
-    const address = await signer.getAddress()
+  // init()
+  useEffect(async ()=>{
+    async function fetchURI(){
+      const address = await signer.getAddress()
     console.log("Signer "+address);
      const uri = await contract.getTokenURI(address);
      console.log(uri)
@@ -28,8 +33,17 @@ function Channel() {
      setChannelName(json['channel_name'])
      setChannelDesc(json['description'])
      setChannelNFT(json['image'])
-  
-    
+     setContent(json['content'])
+     setContentDesc(content[0]['description']);
+     setContentImg(content[0]['content-image']);
+     console.log(content[0]);
+    }
+    fetchURI();
+  },[])
+
+  async function redirect(){
+    window.location.href="/createcontent"
+    return;
   }
  
 
@@ -53,7 +67,9 @@ function Channel() {
           </div>
           <div className="w-1/5">
             <div className="flex items-center justify-end">
-              <button className="flex mx-auto m-2 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-md font-semibold text-md">
+              <button 
+              onClick={redirect}
+              className="flex mx-auto m-2 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-md font-semibold text-md">
                 Create Content
               </button>
             </div>
@@ -101,12 +117,12 @@ function Channel() {
             <div className="flex mb-4 relative">
               <div className="flex-1 mr-1">
                 <div>
-                  <img src={card1} alt="" />
+                  <img src={contentImg} alt="" />
                 </div>
                 <div className="mb-4">
-                  <h4 className="text-sm font-medium">Video One</h4>
+                  <h4 className="text-sm font-medium"></h4>
                   <p className="mt-2 font-hairline text-sm text-grey-darker">
-                    Affinity Tech
+                    {contentDesc}
                     <span className="w-3 h-3 text-white inline-block text-center rounded-full bg-grey-dark text-2xs">
                       &#10003;
                     </span>

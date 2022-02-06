@@ -1,12 +1,70 @@
 import { useState } from "react";
 import {SpinningCircleLoader} from "react-loaders-kit";
+import  { Moralis } from 'moralis';
+
+const ethers = require('ethers');
+const contractJson = require('../../../src/abi/CreatorNFT.json');
+const contractAddressJson = require('../../../src/abi/creator-contract-address.json');
+const contractAbi = contractJson.abi
+const contractAddress = contractAddressJson.CreatorNFT 
+
+const API_URL = 'https://s3nlldgkmodi.usemoralis.com:2053/server';
+const API_KEY = 'cOep3uCa15236HwUfmeHmvLtTiNBy3t2ePpveLsk';
+
+
 function CreateChannel() {
   const [submitStatus, setSubmitStatus] = useState(false);
+  const [desc, setDesc] = useState("");
+  const[file,setFile] = useState();
+  const signer = (new ethers.providers.Web3Provider(window.ethereum)).getSigner();
+  const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
-  const handleSubmit = () => {
+  async function handleSubmit(){
     setSubmitStatus(true);
+    await Moralis.start({ serverUrl: API_URL, appId: API_KEY });
+    await Moralis.authenticate();
+    const address = await signer.getAddress()
+    console.log("Signer "+address);
+    const uri = await contract.getTokenURI(address);
+    console.log(uri)
+    const res = await fetch(uri)
+    const json = await res.json()
+    console.log(json);
+
+    const image = new Moralis.File(file.name, file);
+    console.log("Uploading file... ")
+    await image.saveIPFS();
+    console.log(image.ipfs(), image.hash())
+
+    const imageURI = image.ipfs();
+
+    const contentObj = {
+      "description": desc,
+      "content-image": imageURI
+    }
+    json['content'].push(contentObj);
+    const metadata = json;
+    console.log(metadata);
+    const metadataFile = new Moralis.File("metadata.json", {base64 : btoa(JSON.stringify(metadata))});
+    await metadataFile.saveIPFS();
+    const metadataURI = metadataFile.ipfs();
+    console.log(metadataURI);
+
+    await updateTokenURI(metadataURI);
+
+    window.location.href = "/channel";
     // The logic to submit the info. Set 'setSubmitStatus' to true if a positive feedback is received.
   };
+
+  async function updateTokenURI(_uri){
+    console.log("Metadata URI "+_uri)
+    const signer = (new ethers.providers.Web3Provider(window.ethereum)).getSigner();
+    const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+    const txt = await contract.updateTokenURI(_uri);
+    
+    console.log("Udated Token URI"+Object.keys(txt));
+    return;
+  }
 
   return (
     <div className="create bg-purple-100">
@@ -14,12 +72,12 @@ function CreateChannel() {
         <div className="mr-auto ml-auto w-full">
           <div className="w-full max-w-md mr-auto ml-auto mt-4 mb-1 text-center">
             <h1 className="text-gray-800 block text-3xl font-extrabold font-2xl">
-              Create Channel
+              Upload Content
             </h1>
           </div>
           <div className="w-full max-w-md mr-auto ml-auto mt-4">
             <div className="bg-white shadow-lg rounded-md px-8 py-8 mb-4 ml-auto mr-auto">
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-medium mb-2"
                   htmlFor="username"
@@ -33,7 +91,7 @@ function CreateChannel() {
                   type="text"
                   placeholder="My Content"
                 />
-              </div>
+              </div> */}
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-medium mb-2"
@@ -47,6 +105,7 @@ function CreateChannel() {
                   id="description"
                   type="text"
                   placeholder="My Content Description"
+                  onChange={e => setDesc(e.target.value)}
                 />
               </div>
               <div className="mb-6">
@@ -64,6 +123,7 @@ function CreateChannel() {
                   name="contentImage"
                   alt="Content Image"
                   placeholder="Content Image"
+                  onChange={e => setFile(e.target.files[0])}
                 />
               </div>
 

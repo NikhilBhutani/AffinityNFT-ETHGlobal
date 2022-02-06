@@ -56,7 +56,8 @@ function CreateChannel() {
     const metadata = {
       "channel_name": channelName,
       "description": desc,
-      "image":imageURI
+      "image":imageURI,
+      "content":[]
     }
     const metadataFile = new Moralis.File("metadata.json", {base64 : btoa(JSON.stringify(metadata))});
     await metadataFile.saveIPFS();
