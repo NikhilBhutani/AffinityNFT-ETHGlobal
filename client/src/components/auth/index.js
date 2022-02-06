@@ -29,23 +29,28 @@ function Auth() {
    let address = currentUser.get("ethAddress")
    console.log("Here ")
     buttonText = address.substring(0,4)+"...."+address.substring(address.length-4, address.length)
+    
   }else {
+   
     buttonText = "Connect Wallet"
   }
  
   async function login() {
 
     if (!currentUser) {
+      console.log("Not loggedin ")
       globalUser = currentUser;
     //  window.location.href = "/homepage";
      // Moralis.User.logOut();
-     Moralis.authenticate().then((user) => {
+    await Moralis.authenticate().then((user) => {
       console.log(user.get("ethAddress"));
       globalUser = user;      
     });
+    redirect()
+    }else {
+      redirect()
     } 
 
-    redirect()
   }
 
   async function redirect(){

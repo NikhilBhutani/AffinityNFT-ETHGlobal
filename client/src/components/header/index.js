@@ -1,7 +1,10 @@
 import "./index.css";
 import logo from "../cards/Affinity.png";
+import  { Moralis } from 'moralis';
 
 function header() {
+
+  Moralis.User.logOut();
   return (
     <div className="header">
       <header className="text-gray-700 body-font border-b border-gray-200 flex justify-between">
@@ -12,7 +15,7 @@ function header() {
             target="_blank"
           >
             <img src={logo} alt="Affinity Logo" className="w-10" />
-            AffinityDAO
+            AffinityNFT
           </a>
         </div>
 
