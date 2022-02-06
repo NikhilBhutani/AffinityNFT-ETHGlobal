@@ -1,35 +1,73 @@
-import { useState } from 'react';
 import { Moralis } from "moralis";
 import card1 from "../cards/card1.png";
 import card2 from "../cards/card6.png";
 import card3 from "../cards/card3.png";
 import card4 from "../cards/card7.png";
+const ethers = require('ethers');
+const contractJson = require('../../../src/abi/CreatorNFT.json');
+const contractAddressJson = require('../../../src/abi/creator-contract-address.json');
+const contractAbi = contractJson.abi
+const contractAddress = contractAddressJson.CreatorNFT 
+const signer = (new ethers.providers.Web3Provider(window.ethereum)).getSigner();
+const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+let buttonText = ""
 
-function Auth() {
-  const API_URL = "https://s3nlldgkmodi.usemoralis.com:2053/server";
-  const API_KEY = "cOep3uCa15236HwUfmeHmvLtTiNBy3t2ePpveLsk";
-  var globalUser;
-
-  const [userAuth, setUserAuth] = useState(false);
-
-  async function startMoralisAndLogin() {
-    await Moralis.start({ serverUrl: API_URL, appId: API_KEY })
-    const currentUser = await Moralis.authenticate();
-    if(currentUser){
-      console.log(currentUser.get("ethAddress"));
-      globalUser = currentUser;
-    }
-    setUserAuth(true);
-    return;
-  }
+  // async function startMoralisAndLogin() {
+  //   await Moralis.start({ serverUrl: API_URL, appId: API_KEY })
+  //   const currentUser = await Moralis.authenticate();
+  //   if(currentUser){
+  //     console.log(currentUser.get("ethAddress"));
+  //     globalUser = currentUser;
+  //   }
+  //   setUserAuth(true);
+  //   return;
+  // }
 
   async function userRedirect() {
     window.location.href = "/create";
     return;
+
+function Auth() {
+   var globalUser; 
+   
+  const currentUser = Moralis.User.current();
+  if(currentUser){
+   let address = currentUser.get("ethAddress")
+   console.log("Here ")
+    buttonText = address.substring(0,4)+"...."+address.substring(address.length-4, address.length)
+  }else {
+    buttonText = "Connect Wallet"
+  }
+ 
+  async function login() {
+
+    if (!currentUser) {
+      globalUser = currentUser;
+    //  window.location.href = "/homepage";
+     // Moralis.User.logOut();
+     Moralis.authenticate().then((user) => {
+      console.log(user.get("ethAddress"));
+      globalUser = user;      
+    });
+    } 
+
+    redirect()
   }
 
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [user, setUser] = useState;
+  async function redirect(){
+    const signer = (new ethers.providers.Web3Provider(window.ethereum)).getSigner();
+    const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+    const address = await signer.getAddress()
+       console.log("Signer "+address);
+        const uri = await contract.getTokenURI(address);
+         console.log(uri)
+
+         if(uri === ""){
+          window.location.href = "/user";
+         }else {
+          window.location.href = "/homepage";
+         }
+  }
 
   return (
     <div className="auth bg-purple-100">
@@ -40,7 +78,7 @@ function Auth() {
               Welcome to Affinity
             </h1>
           </div>
-          { userAuth ? 
+          {/* { userAuth ? 
             <button
               onClick={userRedirect}
               className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-2xl font-semibold text-2xl"
@@ -54,7 +92,13 @@ function Auth() {
             >
               Connect Wallet
             </button>
-          }
+          } */}
+          <button
+            onClick={login}
+            className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded md:text-2xl font-semibold text-2xl"
+          >
+            {buttonText}
+          </button>
           <div className="cards mt-24 py-24">
             <div className="flex flex-wrap -m-4 justify-evenly align-center">
               <div className="p-4 md:w-1/4 sm:w-2/4 w-2/4">

@@ -3,12 +3,11 @@ import Text from "antd/lib/typography/Text";
 import { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 import  { Moralis } from 'moralis';
-import {any} from '../../../src/abi/CreatorNFT.json'
 const ethers = require('ethers');
 
 // Import the json file from build to get the abi
 const contractJson = require('../../../src/abi/CreatorNFT.json');
-const contractAddressJson = require('../../../src/abi/contract-address.json');
+const contractAddressJson = require('../../../src/abi/creator-contract-address.json');
 const contractAbi = contractJson.abi
 const contractAddress = contractAddressJson.CreatorNFT 
 

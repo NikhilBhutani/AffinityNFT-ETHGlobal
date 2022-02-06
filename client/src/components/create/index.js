@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {SpinningCircleLoader} from "react-loaders-kit";
 import  { Moralis } from 'moralis';
 import loadingGif from "../../assets/blockLoading.gif";
 import mintedGif from "../../assets/fishLoading.gif";
@@ -9,7 +10,10 @@ const contractAddressJson = require('../../../src/abi/contract-address.json');
 const contractAbi = contractJson.abi
 const contractAddress = contractAddressJson.CreatorNFT 
 const API_URL = 'https://s3nlldgkmodi.usemoralis.com:2053/server';
-  const API_KEY = 'cOep3uCa15236HwUfmeHmvLtTiNBy3t2ePpveLsk';
+const API_KEY = 'cOep3uCa15236HwUfmeHmvLtTiNBy3t2ePpveLsk';
+
+
+
 
 function CreateChannel() {
   const [submitStatus, setSubmitStatus] = useState(false);
