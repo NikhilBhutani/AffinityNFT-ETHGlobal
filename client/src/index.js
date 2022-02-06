@@ -11,7 +11,7 @@ import Auth from "../src/components/auth";
 import ChannelView from "../src/components/view";
 import Add from "../src/components/add";
 import User from "../src/components/user";
-import viewChannel from "../src/components/viewChannel";
+import ViewChannel from "../src/components/viewChannel";
 
 const API_URL = "https://s3nlldgkmodi.usemoralis.com:2053/server";
 const API_KEY = "cOep3uCa15236HwUfmeHmvLtTiNBy3t2ePpveLsk";
@@ -30,7 +30,7 @@ ReactDOM.render(
         <Route path="/channel" element={<ChannelView />} />
         <Route path="/createcontent" element={<Add />} />
         <Route path="/user" element={<User />} />
-        <Route path="/viewchannel" element={<viewChannel />} />
+        <Route path="/viewchannel" element={<ViewChannel />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

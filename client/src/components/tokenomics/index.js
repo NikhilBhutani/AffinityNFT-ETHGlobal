@@ -1,4 +1,4 @@
-import tokenomic from "../cards/token-distrib.png"
+import tokenomic from "../cards/token-distrib.png";
 
 function tokenomics() {
   return (
@@ -13,10 +13,10 @@ function tokenomics() {
               Our token distribution
             </p>
           </div>
-          <div class="w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
+          <div className="w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
             <img
               alt="feature"
-              class="object-cover object-center h-full w-full"
+              className="object-cover object-center h-full w-full"
               src={tokenomic}
             />
           </div>
