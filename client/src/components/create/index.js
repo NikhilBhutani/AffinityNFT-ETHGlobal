@@ -3,7 +3,13 @@ import {SpinningCircleLoader} from "react-loaders-kit";
 import  { Moralis } from 'moralis';
 import loadingGif from "../../assets/blockLoading.gif";
 import mintedGif from "../../assets/fishLoading.gif";
-
+import first from "../cards/prodcards/first.png";
+import second from "../cards/prodcards/second.png";
+import third from "../cards/prodcards/third.png";
+import fourth from "../cards/prodcards/fourth.png";
+import fifth from "../cards/prodcards/fifth.png";
+import sixth from "../cards/prodcards/sixth.png";
+import seventh from "../cards/prodcards/seventh.png";
 const ethers = require('ethers');
 const contractJson = require('../../../src/abi/CreatorNFT.json');
 const contractAddressJson = require('../../../src/abi/creator-contract-address.json');
@@ -11,7 +17,7 @@ const contractAbi = contractJson.abi
 const contractAddress = contractAddressJson.CreatorNFT 
 const API_URL = 'https://s3nlldgkmodi.usemoralis.com:2053/server';
 const API_KEY = 'cOep3uCa15236HwUfmeHmvLtTiNBy3t2ePpveLsk';
-
+const imageArr = [first, second, third, fourth, fifth, sixth,seventh]
 function CreateChannel() {
   const [submitStatus, setSubmitStatus] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -19,16 +25,6 @@ function CreateChannel() {
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState();
   const [minted, setMinted] = useState(false);
-
-  // const creatorNFTcards = '../cards/prodcards';
-   
-
-  //  fs.readdir(creatorNFTcards, (err, files) => {
-  //    files.forEach(file => {
-  //   console.log("File ",file);
-  //   });
-  //  });
-  
   async function handleSubmit(){
     setSubmitStatus(true);
     console.log("channel name: " + channelName);
