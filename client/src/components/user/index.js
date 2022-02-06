@@ -27,7 +27,7 @@ async function getContentCreatorNFTs(){
             <a href="/" className="text-red-light tracking-tight flex flex-row">
               <img src={logo} alt="Affinity Logo" className="w-10 mr-5" />
               <span className="text-black font-bold tracking-tight">
-                AffinityDAO
+                AffinityNFT
               </span>
             </a>
           </div>

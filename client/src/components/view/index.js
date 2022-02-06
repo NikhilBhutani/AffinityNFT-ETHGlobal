@@ -33,10 +33,13 @@ function Channel() {
      setChannelName(json['channel_name'])
      setChannelDesc(json['description'])
      setChannelNFT(json['image'])
-     setContent(json['content'])
-     setContentDesc(content[0]['description']);
-     setContentImg(content[0]['content-image']);
-     console.log(content[0]);
+     //setContent(json['content'])
+
+   
+     console.log(json['content'][0].description)
+      setContentDesc(json['content'][0].description);
+      setContentImg(json['content'][0].image);
+    //  console.log(content[0]);
     }
     fetchURI();
   },[])
@@ -58,7 +61,7 @@ function Channel() {
             <a href="/" className="text-red-light tracking-tight flex flex-row">
               <img src={logo} alt="Affinity Logo" className="w-10 mr-5" />
               <span className="text-black font-bold tracking-tight">
-                AffinityDAO
+                AffinityNFT
               </span>
             </a>
           </div>
@@ -117,7 +120,7 @@ function Channel() {
             <div className="flex mb-4 relative">
               <div className="flex-1 mr-1">
                 <div>
-                  <img src={contentImg} alt="" />
+                  <img src={contentImg} />
                 </div>
                 <div className="mb-4">
                   <h4 className="text-sm font-medium"></h4>

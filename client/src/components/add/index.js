@@ -40,7 +40,7 @@ function CreateChannel() {
 
     const contentObj = {
       "description": desc,
-      "content-image": imageURI
+      "image": imageURI
     }
     json['content'].push(contentObj);
     const metadata = json;
@@ -52,7 +52,10 @@ function CreateChannel() {
 
     await updateTokenURI(metadataURI);
 
-    window.location.href = "/channel";
+    setTimeout(() => {
+      console.log("congraulations on uploading your content!");
+      window.location.href = "/channel";
+    }, 20000);
     // The logic to submit the info. Set 'setSubmitStatus' to true if a positive feedback is received.
   };
 

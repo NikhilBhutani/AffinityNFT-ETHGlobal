@@ -38,7 +38,7 @@ function CreateChannel() {
     setTimeout(() => {
       console.log("congraulations on minting your creator NFT!");
       window.location.href = "/channel";
-    }, 5000);
+    }, 20000);
     return;
     // The logic to submit the info. Set 'setSubmitStatus' to true if a positive feedback is received.
   };
